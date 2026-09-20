@@ -1,0 +1,712 @@
+/* =========================================
+   FACE UNLOCK PAGE
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.face-lock {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+
+  padding: 32px 20px;
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(236, 72, 153, 0.18),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(168, 85, 247, 0.18),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #130a19 0%,
+      #211027 48%,
+      #0f0914 100%
+    );
+}
+
+/* =========================================
+   SOFT BACKGROUND LIGHT
+   ========================================= */
+
+.face-lock::before {
+  content: "";
+
+  position: absolute;
+
+  width: 380px;
+  height: 380px;
+
+  top: -170px;
+  left: -150px;
+
+  border-radius: 50%;
+
+  background: rgba(244, 114, 182, 0.13);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+.face-lock::after {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -200px;
+  bottom: -190px;
+
+  border-radius: 50%;
+
+  background: rgba(168, 85, 247, 0.12);
+
+  filter: blur(85px);
+
+  pointer-events: none;
+}
+
+/* =========================================
+   MAIN CONTENT CARD
+   ========================================= */
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  width: min(560px, 94vw);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 42px 42px 30px;
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.10),
+      rgba(255, 255, 255, 0.035)
+    );
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  animation: contentAppear 0.7s ease;
+}
+
+@keyframes contentAppear {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
+   TOP DECORATION
+   ========================================= */
+
+.top-decoration {
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-bottom: 17px;
+
+  color: #f9a8d4;
+
+  font-size: 14px;
+
+  opacity: 0.8;
+}
+
+.top-decoration span:nth-child(2) {
+  font-size: 9px;
+}
+
+/* =========================================
+   SMALL LABEL
+   ========================================= */
+
+.tiny {
+  margin: 0 0 13px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 4px;
+
+  color: #f9a8d4;
+
+  text-transform: uppercase;
+}
+
+/* =========================================
+   TITLE
+   ========================================= */
+
+.content h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(40px, 6vw, 54px);
+
+  font-weight: 500;
+
+  line-height: 1.05;
+
+  letter-spacing: -1.2px;
+
+  background:
+    linear-gradient(
+      120deg,
+      #ffffff 10%,
+      #fbcfe8 55%,
+      #e9d5ff 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.description {
+  width: min(390px, 100%);
+
+  margin: 17px auto 25px;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+
+  color: rgba(255, 255, 255, 0.60);
+}
+
+/* =========================================
+   CAMERA
+   ========================================= */
+
+.camera-container {
+  position: relative;
+
+  width: min(390px, 100%);
+
+  aspect-ratio: 4 / 3;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(0, 0, 0, 0.18)
+    );
+
+  box-shadow:
+    inset 0 0 35px rgba(0, 0, 0, 0.18),
+    0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   VIDEO
+   ========================================= */
+
+.camera-container video {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: inherit;
+
+  background: #100914;
+
+  transform: scaleX(-1);
+}
+
+/* =========================================
+   CAMERA CORNERS
+   ========================================= */
+
+.camera-container::before,
+.camera-container::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: 5;
+
+  width: 24px;
+  height: 24px;
+
+  pointer-events: none;
+}
+
+.camera-container::before {
+  top: 13px;
+  left: 13px;
+
+  border-top: 2px solid rgba(255, 255, 255, 0.45);
+  border-left: 2px solid rgba(255, 255, 255, 0.45);
+}
+
+.camera-container::after {
+  right: 13px;
+  bottom: 13px;
+
+  border-right: 2px solid rgba(255, 255, 255, 0.45);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.45);
+}
+
+/* =========================================
+   CAMERA PLACEHOLDER
+   ========================================= */
+
+.camera-placeholder {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(244, 114, 182, 0.08),
+      transparent 55%
+    );
+
+  color: rgba(255, 255, 255, 0.36);
+}
+
+.camera-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  font-size: 24px;
+}
+
+.camera-placeholder span {
+  font-size: 10px;
+
+  color: rgba(255, 255, 255, 0.30);
+}
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.status {
+  width: 100%;
+
+  min-height: 20px;
+
+  margin: 16px 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.start-button,
+.verify-button {
+  min-width: 178px;
+
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 11px;
+
+  padding: 12px 24px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.start-button {
+  background:
+    linear-gradient(
+      135deg,
+      #ec4899,
+      #a855f7
+    );
+
+  box-shadow:
+    0 10px 28px rgba(236, 72, 153, 0.25);
+}
+
+.verify-button {
+  background:
+    linear-gradient(
+      135deg,
+      #a855f7,
+      #ec4899
+    );
+
+  box-shadow:
+    0 10px 28px rgba(168, 85, 247, 0.25);
+}
+
+.start-button:hover,
+.verify-button:hover {
+  transform: translateY(-2px);
+}
+
+.start-button:hover {
+  box-shadow:
+    0 15px 35px rgba(236, 72, 153, 0.38);
+}
+
+.verify-button:hover {
+  box-shadow:
+    0 15px 35px rgba(168, 85, 247, 0.38);
+}
+
+.start-button:active,
+.verify-button:active {
+  transform: translateY(0);
+}
+
+.button-icon {
+  font-size: 17px;
+
+  transition: transform 0.25s ease;
+}
+
+.start-button:hover .button-icon {
+  transform: translateX(4px);
+}
+
+/* =========================================
+   LOADING
+   ========================================= */
+
+.loading-indicator {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  height: 10px;
+
+  margin-top: 9px;
+}
+
+.loading-dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #f9a8d4;
+
+  animation: loadingPulse 1.2s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes loadingPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* =========================================
+   PRIVACY NOTE
+   ========================================= */
+
+.privacy-note {
+  margin: 19px 0 0;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.22);
+
+  letter-spacing: 0.2px;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 700px) {
+  .face-lock {
+    padding: 24px 15px;
+  }
+
+  .content {
+    width: min(500px, 94vw);
+
+    padding: 36px 26px 27px;
+
+    border-radius: 27px;
+  }
+
+  .content h1 {
+    font-size: 43px;
+  }
+
+  .description {
+    width: min(370px, 100%);
+
+    margin-top: 16px;
+    margin-bottom: 23px;
+
+    font-size: 14px;
+  }
+
+  .camera-container {
+    width: min(390px, 100%);
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+  .face-lock {
+    min-height: 100svh;
+
+    padding: 16px 12px;
+  }
+
+  .content {
+    width: 94vw;
+
+    padding: 30px 18px 23px;
+
+    border-radius: 24px;
+  }
+
+  .top-decoration {
+    margin-bottom: 15px;
+  }
+
+  .tiny {
+    margin-bottom: 12px;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+  }
+
+  .content h1 {
+    font-size: 36px;
+
+    letter-spacing: -0.8px;
+  }
+
+  .description {
+    width: 95%;
+
+    margin: 15px auto 21px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+  .camera-container {
+    width: 100%;
+
+    border-radius: 19px;
+  }
+
+  .status {
+    margin-top: 14px;
+    margin-bottom: 13px;
+
+    font-size: 11px;
+  }
+
+  .start-button,
+  .verify-button {
+    min-width: 165px;
+
+    min-height: 44px;
+
+    padding: 11px 20px;
+
+    font-size: 12px;
+  }
+
+  .privacy-note {
+    margin-top: 17px;
+  }
+}
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media (max-width: 380px) {
+  .content {
+    padding: 25px 15px 20px;
+  }
+
+  .content h1 {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .camera-container {
+    border-radius: 17px;
+  }
+
+  .camera-icon {
+    width: 52px;
+    height: 52px;
+
+    font-size: 22px;
+  }
+
+  .camera-placeholder span {
+    font-size: 9px;
+  }
+
+  .status {
+    margin-top: 12px;
+    margin-bottom: 11px;
+  }
+
+  .privacy-note {
+    font-size: 8px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
